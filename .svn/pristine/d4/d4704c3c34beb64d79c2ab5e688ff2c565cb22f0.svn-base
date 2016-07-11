@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.ShopRepresentative" table="songcai_shop_representative">
+  <id column="档主id" name="sr_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.songcai.lkcg.domain.Shop" column="档铺id"
+   fetch="join" name="shop" unique="true"/>
+  <property column="真实姓名" lazy="false" length="50" name="sr_name" type="string"/>
+  <property column="身份证号码" lazy="false" length="50"
+   name="sr_identity_card" type="string"/>
+  <property column="手机号码" lazy="true" length="50" name="sr_telephone" type="string"/>
+  <property column="密码" lazy="true" length="100" name="sr_password" type="string"/>
+  <property column="银行卡" lazy="true" length="50" name="sr_bank_card" type="string"/>
+ </class>
+</hibernate-mapping>

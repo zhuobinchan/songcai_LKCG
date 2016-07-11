@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.Commodity" table="songcai_commodity">
+  <id column="商品id" name="commodity_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <property column="商品名" generated="never" lazy="false"
+   name="commodity_name" type="string"/>
+  <property column="商品价格" generated="never" lazy="false"
+   name="commodity_price" type="float"/>
+  <property column="商品介绍" generated="never" lazy="false"
+   name="commodity_introduce" type="string"/>
+  <property column="商品月销量" generated="never" lazy="false"
+   name="commodity_sales_volume" type="int"/>
+  <many-to-one class="com.songcai.lkcg.domain.CommodityType"
+   column="商品类型id" name="ct"/>
+  <many-to-one class="com.songcai.lkcg.domain.Shop" column="档铺id"
+   lazy="false" name="shop"/>
+ </class>
+</hibernate-mapping>

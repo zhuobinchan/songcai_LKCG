@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class lazy="true" name="com.songcai.lkcg.domain.Address" table="songcai_address">
+  <id column="收货地址id" name="address_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.songcai.lkcg.domain.Customer" column="顾客id" name="customer"/>
+  <property column="默认状态" generated="never" lazy="false"
+   name="address_state" type="int"/>
+  <property column="收货地址名" generated="never" lazy="false"
+   name="address_doorplate" type="string"/>
+ </class>
+</hibernate-mapping>

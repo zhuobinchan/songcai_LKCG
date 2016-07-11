@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.OrderDetail" table="songcai_order_detail">
+  <id column="订单详细表id" name="od_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.songcai.lkcg.domain.Order" column="订单id" name="order"/>
+  <many-to-one class="com.songcai.lkcg.domain.Commodity" column="商品id" name="commodity"/>
+  <many-to-one class="com.songcai.lkcg.domain.SetMeal" column="套餐id" name="setmeal"/>
+  <property column="商品数量" name="commodity_quantity" type="integer"/>
+  <property column="套餐数量" name="setmeal_quantity" type="integer"/>
+ </class>
+</hibernate-mapping>

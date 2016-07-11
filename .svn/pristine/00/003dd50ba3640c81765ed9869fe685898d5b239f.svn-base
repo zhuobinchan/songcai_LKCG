@@ -1,0 +1,52 @@
+package com.songcai.lkcg.action;
+
+import java.util.List;
+
+import com.songcai.lkcg.domain.Shop;
+import com.songcai.lkcg.domain.ShopRepresentative;
+
+public class ShopRepresentativeAction extends BaseAction {
+	private String sr_name;
+	private String sr_password;
+	private Shop shop;
+	private String jsonString;
+
+	public String getSr_name() {
+		return sr_name;
+	}
+
+	public void setSr_name(String sr_name) {
+		this.sr_name = sr_name;
+	}
+
+	public String getSr_password() {
+		return sr_password;
+	}
+
+	public void setSr_password(String sr_password) {
+		this.sr_password = sr_password;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public void login() {
+		List<ShopRepresentative> srIndex = baseService
+				.getAll("ShopRepresentative");
+		shop = new Shop();
+		for (ShopRepresentative shopRepresentative : srIndex) {
+			if (shopRepresentative.getSr_name().equals(sr_name)) {
+				if (shopRepresentative.getSr_password().equals(sr_password)) {
+					shop = shopRepresentative.getShop();
+				}
+			}
+
+		}
+
+	}
+}

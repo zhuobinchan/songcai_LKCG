@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.CommodityType" table="songcai_commodity_type">
+  <id column="商品类型id" name="ct_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <property column="类型名称" generated="never" lazy="true" length="50"
+   name="ct_name" type="string"/>
+  <set name="commodities" cascade="persist" fetch="join" inverse="true" sort="unsorted">
+   <key column="商品类型id"/>
+   <one-to-many class="com.songcai.lkcg.domain.Commodity"/>
+  </set>
+ </class>
+</hibernate-mapping>

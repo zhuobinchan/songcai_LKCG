@@ -1,0 +1,8 @@
+package com.songcai.lkcg.dao;
+
+import com.songcai.lkcg.domain.Customer;
+
+public interface CustomerDao extends BaseDao {
+	public Customer findCustomerByName(String customer_name);
+
+}

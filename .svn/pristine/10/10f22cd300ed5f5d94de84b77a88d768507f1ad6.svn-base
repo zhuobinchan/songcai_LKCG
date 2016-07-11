@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.Shop" table="songcai_shop">
+  <id column="档铺id" name="shop_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <one-to-one cascade="persist"
+   class="com.songcai.lkcg.domain.ShopRepresentative" name="sr"/>
+  <property column="档铺名" generated="never" lazy="true" length="50"
+   name="shop_name" type="string"/>
+  <property column="档铺介绍" generated="never" lazy="true" length="200"
+   name="shop_introduce" type="string"/>
+  <property column="档铺地址" generated="never" lazy="true" length="200"
+   name="shop_address" type="string"/>
+  <property column="档铺图片" generated="never" lazy="true" length="200"
+   name="shop_icon" type="string"/>
+  <property column="档铺电话" generated="never" lazy="true" length="50"
+   name="shop_telephone" type="string"/>
+  <property column="所属市场" generated="never" lazy="false"
+   name="shop_market" type="string"/>
+  <property column="档铺类型" generated="never" lazy="true" length="50"
+   name="shop_type" type="string"/>
+  <set cascade="persist" fetch="join" inverse="true" name="evaluates" sort="unsorted">
+   <key column="评价id"/>
+   <one-to-many class="com.songcai.lkcg.domain.Evaluate"/>
+  </set>
+  <set cascade="persist" fetch="join" inverse="true" name="commodities" sort="unsorted">
+   <key column="商品id"/>
+   <one-to-many class="com.songcai.lkcg.domain.Commodity"/>
+  </set>
+ </class>
+</hibernate-mapping>

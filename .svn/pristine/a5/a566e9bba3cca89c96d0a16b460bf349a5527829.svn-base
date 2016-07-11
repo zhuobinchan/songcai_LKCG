@@ -1,0 +1,78 @@
+package com.songcai.lkcg.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+
+import com.alibaba.fastjson.JSON;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class BaseAction extends ActionSupport implements ServletRequestAware,
+		ServletResponseAware {
+
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+
+	/**
+	 * 返回json字符串
+	 * 
+	 * @param <T>
+	 */
+	protected <T> String ObjectToJson(T obj) {
+		return JSON.toJSONString(obj);
+	}
+
+	/**
+	 * Json返回JavaBean
+	 * 
+	 * @param <T>
+	 */
+	protected <T> T JsonToObject(String JsonString, Class<T> clazz) {
+		return JSON.parseObject(JsonString, clazz);
+	}
+
+	/**
+	 * Description: 直接输出Text
+	 * 
+	 * @param result
+	 *            输出的内容 removeCache 是否清楚cache
+	 * @return
+	 */
+	protected void writeResult(String result, boolean removeCache) {
+		PrintWriter writer = null;
+		try {
+			if (removeCache) {
+				response.setHeader("Pragma", "No-cache");// 清除缓存
+				response.setHeader("Cache-Control", "no-cache");
+				response.setDateHeader("Expires", 0);
+			}
+			response.setContentType("text/html; charset=utf-8");
+			writer = response.getWriter();
+			writer.print(result);
+			writer.flush();
+		} catch (IOException e) {
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+		}
+	}
+
+	@Override
+	public void setServletResponse(HttpServletResponse arg0) {
+		this.response = arg0;
+
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		this.request = arg0;
+
+	}
+
+}

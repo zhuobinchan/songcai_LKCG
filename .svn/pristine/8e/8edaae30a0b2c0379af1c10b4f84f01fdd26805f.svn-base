@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.Evaluate" table="songcai_evaluate">
+  <id column="评价id" name="evaluate_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <property column="评价内容" generated="never" lazy="false"
+   name="evaluate_content" type="string"/>
+  <property column="评价日期" generated="never" lazy="false"
+   name="evaluate_date" type="string"/>
+  <property column="评价等级" generated="never" lazy="false"
+   name="evaluate_rank" type="string"/>
+  <many-to-one class="com.songcai.lkcg.domain.Shop" column="档铺id" name="shop"/>
+  <many-to-one class="com.songcai.lkcg.domain.Customer" column="顾客id" name="customer"/>
+ </class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+package com.songcai.lkcg.test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.songcai.lkcg.domain.Customer;
+import com.songcai.lkcg.service.dao.CustomerServiceDao;
+
+public class Test {
+	private static ApplicationContext ctx = new ClassPathXmlApplicationContext(
+			"applicationContext.xml");
+
+	// private static BaseServiceDao baseService = (BaseServiceDao) ctx
+	// .getBean("BaseServiceDao");
+	//
+	// private static CommodityServiceDao commodityServiceDao =
+	// (CommodityServiceDao) ctx
+	// .getBean("CommodityServiceDao");
+
+	private static CustomerServiceDao customerServiceDao = (CustomerServiceDao) ctx
+			.getBean("CustomerServiceDao");
+
+	@org.junit.Test
+	public void mytest() {
+		// System.out.println(newDao.detailNews(1).getType().getTitle());
+		// Administrator administrator = new Administrator();
+		// administrator.setAdministrator_name("BIN");
+		// administrator.setAdministrator_password("55");
+		// baseService.getAll("Shop");
+		// commodityServiceDao.getByShopId(1L);
+		// List<Shop> shops = baseService.getAll("Shop");
+		// for (Shop shop : shops) {
+		// System.out.println("name:" + shop.getShop_name());
+		// // System.out.println("commodity" + shop.getCommodities());
+		// }
+		//
+
+		// SimplePropertyPreFilter filter = new SimplePropertyPreFilter(
+		// Shop.class, "shop_id", "sr", "shop_name", "shop_introduce",
+		// "shop_address", "shop_icon", "shop_telephone", "shop_market",
+		// "shop_type");
+		// String str = JSON.toJSONString(shops, filter);
+		// System.out.println(str);
+		//
+		// List<Shop> shops2 = JSON.parseArray(str, Shop.class);
+		// for (Shop shop : shops2) {
+		// System.out.println("shop2_name" + shop.getShop_name());
+		// }
+
+		// List<Commodity> commodities = commodityServiceDao.getByShopId(new
+		// Long(
+		// 2));
+
+		// System.out.println(JSON.toJSONString(commodities, true));
+		Customer customer = customerServiceDao.FindByName("bin");
+		System.out.println(customer.getEvaluates());
+
+	}
+}

@@ -1,0 +1,23 @@
+package com.songcai.lkcg.test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.songcai.lkcg.domain.Administrator;
+import com.songcai.lkcg.service.dao.BaseServiceDao;
+
+public class Test {
+	private static ApplicationContext ctx = new ClassPathXmlApplicationContext(
+			"applicationContext.xml");
+	private static BaseServiceDao baseService = (BaseServiceDao) ctx
+			.getBean("BaseServiceDao");
+
+	@org.junit.Test
+	public void mytest() {
+		// System.out.println(newDao.detailNews(1).getType().getTitle());
+		Administrator administrator = new Administrator();
+		administrator.setAdministrator_name("BIN");
+		administrator.setAdministrator_password("55");
+		baseService.sava(administrator);
+	}
+}

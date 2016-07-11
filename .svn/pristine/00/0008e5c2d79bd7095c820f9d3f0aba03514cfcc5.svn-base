@@ -1,0 +1,40 @@
+package com.songcai.lkcg.action;
+
+import java.util.List;
+
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import com.songcai.lkcg.domain.Shop;
+
+public class ShopAction extends BaseAction {
+
+	private List<Shop> shops;
+	private String jsonString;
+
+	public List<Shop> getShops() {
+		return shops;
+	}
+
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
+
+	public String getJsonString() {
+		return jsonString;
+	}
+
+	public void setJsonString(String jsonString) {
+		this.jsonString = jsonString;
+	}
+
+	public void getAll() {
+		// Fastjson π˝¬À Ù–‘
+		SimplePropertyPreFilter filter = new SimplePropertyPreFilter(
+				Shop.class, "shop_id", "sr", "shop_name", "shop_introduce",
+				"shop_address", "shop_icon", "shop_telephone", "shop_market",
+				"shop_type");
+		shops = baseService.getAll("Shop");
+		jsonString = ObjectToJson(shops, filter);
+		writeResult(jsonString, true);
+	}
+
+}

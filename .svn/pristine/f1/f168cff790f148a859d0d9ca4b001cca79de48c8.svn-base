@@ -1,0 +1,11 @@
+package com.songcai.lkcg.action;
+
+import javax.annotation.Resource;
+
+import com.songcai.lkcg.service.dao.BaseServiceDao;
+
+public class AdministratorAction extends BaseAction {
+	@Resource
+	private BaseServiceDao bs;
+
+}

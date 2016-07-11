@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	<context:annotation-config />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/songcai" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<!-- 依次为最大连接数量，最大等待连接数量 -->
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="60" />
+		<!-- 最大等待时间，单位为毫秒，超时时间会报出错误信息 -->
+		<property name="maxWait" value="10000" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 依赖注入上面所配置的数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 通过hibernate.hbm.xml配置其他相关属性 -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<!-- dao层start -->
+	<bean id="BaseDao" class="com.songcai.lkcg.dao.impl.BaseDaoImpl"
+		abstract="false" lazy-init="default" autowire="default">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="CustomerDao" abstract="false" lazy-init="default"
+		autowire="default" class="com.songcai.lkcg.dao.impl.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="CommodityDao" abstract="false" lazy-init="default"
+		autowire="default" class="com.songcai.lkcg.dao.impl.CommodityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- dao层end -->
+
+	<!-- Service层start -->
+	<bean id="BaseServiceDao" class="com.songcai.lkcg.service.dao.impl.BaseServiceImpl"
+		abstract="false" lazy-init="default" autowire="default">
+		<property name="baseDao" ref="BaseDao"></property>
+	</bean>
+	<bean id="CustomerServiceDao" abstract="false" lazy-init="false"
+		autowire="default" class="com.songcai.lkcg.service.dao.impl.CustomerServiceImpl">
+
+		<property name="customerDao" ref="CustomerDao"></property>
+	</bean>
+	<bean id="CommodityServiceDao" abstract="false" lazy-init="default"
+		autowire="default" class="com.songcai.lkcg.service.dao.impl.CommodityServiceImpl">
+
+		<property name="commodityDao" ref="CommodityDao"></property>
+	</bean>
+	<!-- Service层end -->
+	<!-- action层start -->
+
+	<bean id="CustomerAction" class="com.songcai.lkcg.action.CustomerAction"
+		scope="prototype"></bean>
+	<bean id="ShopAction" scope="prototype" class="com.songcai.lkcg.action.ShopAction">
+	</bean>
+	<bean id="CommodityAction" scope="prototype" class="com.songcai.lkcg.action.CommodityAction">
+	</bean>
+	<bean id="OrderAction" scope="prototype" class="com.songcai.lkcg.action.OrderAction">
+	</bean>
+	<bean id="EvaluateAction" scope="prototype" class="com.songcai.lkcg.action.EvaluateAction">
+	</bean>
+	<!-- action层end -->
+</beans>
+	
