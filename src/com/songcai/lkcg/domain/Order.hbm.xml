@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class lazy="false" name="com.songcai.lkcg.domain.Order" table="songcai_order">
+  <id column="订单id" name="order_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <property column="收货人" generated="never" length="20"
+   name="order_consignee" type="string"/>
+  <property column="收货地址" generated="never" length="200"
+   name="order_address" type="string"/>
+  <property column="下单时间" generated="never" length="20"
+   name="order_time" type="string"/>
+  <property column="订单描述" generated="never" length="200"
+   name="order_introduce" type="string"/>
+  <property column="订单总价" generated="never" name="order_total_price" type="double"/>
+  <property column="订单状态" generated="never" lazy="true"
+   name="order_state" type="integer"/>
+  <property column="手机号码" generated="never" length="20"
+   name="order_telephone" type="string"/>
+  <many-to-one class="com.songcai.lkcg.domain.Customer" column="顾客id"
+   lazy="false" name="customer"/>
+ </class>
+</hibernate-mapping>

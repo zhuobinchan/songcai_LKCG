@@ -1,0 +1,55 @@
+package com.songcai.lkcg.dao.impl;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+
+import com.songcai.lkcg.dao.BaseDao;
+
+public class BaseDaoImpl extends HibernateDaoSupport implements BaseDao {
+
+	@Override
+	public <T> void savaEntity(T entity) {
+		this.getHibernateTemplate().saveOrUpdate(entity);
+	}
+
+	@Override
+	public <T> void deleteEntity(T entity) {
+		this.getHibernateTemplate().delete(entity);
+
+	}
+
+	@Override
+	public <T> void deleteEntityById(Class<T> entityClass, Serializable id) {
+		this.getHibernateTemplate().delete(this.getEntityById(entityClass, id));
+
+	}
+
+	@Override
+	public <T> void updateEntity(T entity) {
+		this.getHibernateTemplate().saveOrUpdate(entity);
+
+	}
+
+	@Override
+	public <T> List<T> getAllEntity(String entityName) {
+		return (List<T>) this.getHibernateTemplate().find(
+				"from" + " " + entityName);
+
+	}
+
+	@Override
+	public <T> T getEntityById(Class<T> entityClass, Serializable id) {
+		return (T) this.getHibernateTemplate().get(entityClass, id);
+	}
+
+	@Override
+	public <T> List<T> getEntityByColumn(String entityName, String column,
+			String value) {
+
+		return (List<T>) this.getHibernateTemplate().find(
+				"from" + " " + entityName + " where " + column + " = " + "'"
+						+ value + "'");
+	}
+}

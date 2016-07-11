@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class name="com.songcai.lkcg.domain.SetMeal" table="songcai_setmeal">
+  <id column="套餐id" name="setmeal_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <property column="套餐描述" generated="never" lazy="false" length="50"
+   name="setmeal_introduce" type="string"/>
+  <property column="套餐名" generated="never" lazy="false" length="20"
+   name="setmeal_name" type="string"/>
+  <property column="发布日期" generated="never" lazy="false" length="20"
+   name="setmeal_date" type="string"/>
+  <property column="套餐总价" generated="never" lazy="false"
+   name="setmeal_total_price" type="float"/>
+  <property column="套餐图片" lazy="false" length="200" name="setmeal_icon"
+	type="string" />
+  <property column="月销量" generated="never" lazy="false"
+   name="setmeal_sales_volume" type="integer"/>
+  <many-to-one class="com.songcai.lkcg.domain.Administrator"
+   column="管理员id" lazy="false" name="administrator"/>
+  <set cascade="persist" fetch="join" inverse="true" lazy="false"
+   name="smd" sort="unsorted">
+   <key column="套餐id"/>
+   <one-to-many class="com.songcai.lkcg.domain.SetMealDetail"/>
+  </set>
+ </class>
+</hibernate-mapping>

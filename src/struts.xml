@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<package name="lkcg" extends="json-default" namespace="/songcai">
+		<action name="CustomerAction_*" class="com.songcai.lkcg.action.CustomerAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="ShopAction_*" class="com.songcai.lkcg.action.ShopAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="CommodityAction_*" class="com.songcai.lkcg.action.CommodityAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="OrderAction_*" class="com.songcai.lkcg.action.OrderAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="EvaluateAction_*" class="com.songcai.lkcg.action.EvaluateAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="OrderDetailAction_*" class="com.songcai.lkcg.action.OrderDetailAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="ShopRepresentativeAction_*" class="com.songcai.lkcg.action.ShopRepresentativeAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+		<action name="SetMealAction_*" class="com.songcai.lkcg.action.SetMealAction"
+			method="{1}">
+			<result type="json">
+				<param name="root">jsonString</param>
+			</result>
+		</action>
+	</package>
+	<package name="lkcg_net" extends="struts-default" namespace="/songcai_net">
+		<action name="AdministratorNetAction_*" class="com.songcai.lkcg.netaction.AdministratorNetAction"
+			method="{1}">
+			<result name="login">/back/index.jsp</result>
+			<result name="getAll">/back/管理员管理.jsp</result>
+		</action>
+		<action name="ShopRepresentativeNetAction_*" class="com.songcai.lkcg.netaction.ShopRepresentativeNetAction"
+			method="{1}">
+			<result name="getAll">/back/档口代表管理.jsp</result>
+		</action>
+		<action name="CustomerNetAction_*" class="com.songcai.lkcg.netaction.CustomerNetAction"
+			method="{1}">
+			<result name="getAll">/back/顾客管理.jsp</result>
+		</action>
+		<action name="CommodityNetAction_*" class="com.songcai.lkcg.netaction.CommodityNetAction"
+			method="{1}">
+			<result name="getAll">/back/商品管理.jsp</result>
+		</action>
+		<action name="ShopNetAction_*" class="com.songcai.lkcg.netaction.ShopNetAction"
+			method="{1}">
+			<result name="getAll">/back/档口管理.jsp</result>
+		</action>
+		<action name="SetMealNetAction_*" class="com.songcai.lkcg.netaction.SetMealNetAction"
+			method="{1}">
+			<result name="getAll">/back/套餐管理.jsp</result>
+		</action>
+		<action name="OrderNetAction_*" class="com.songcai.lkcg.netaction.OrderNetAction"
+			method="{1}">
+			<result name="getAll">/back/订单管理.jsp</result>
+		</action>
+	</package>
+
+</struts>    

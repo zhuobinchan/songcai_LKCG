@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.songcai.lkcg.domain">
+ <class lazy="true" name="com.songcai.lkcg.domain.SetMealDetail" table="songcai_set_meal_detail">
+  <id column="套餐详细id" name="smd_id" type="long">
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.songcai.lkcg.domain.SetMeal" column="套餐id"
+   lazy="false" name="setmeal"/>
+  <many-to-one class="com.songcai.lkcg.domain.Commodity" column="商品id"
+   lazy="false" name="commodity"/>
+  <property column="商品数量" generated="never" lazy="false"
+   name="commodity_quantity" type="int"/>
+ </class>
+</hibernate-mapping>
